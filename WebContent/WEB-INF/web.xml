@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>cs122b_project1_star_example</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <resource-ref>
+        <description>MySQL DataSource example</description>
+        <res-ref-name>jdbc/moviedb</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    <servlet>
+        <servlet-name>MovieList</servlet-name>
+        <servlet-class>movies.MovieList</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MovieList</servlet-name>
+        <url-pattern>/movies</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SingleMovie</servlet-name>
+        <servlet-class>movies.SingleMovie</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SingleMovie</servlet-name>
+        <url-pattern>/singlemovie</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SingleStar</servlet-name>
+        <servlet-class>movies.SingleStar</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SingleStar</servlet-name>
+        <url-pattern>/singlestar</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SearchForm</servlet-name>
+        <servlet-class>movies.SearchForm</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchForm</servlet-name>
+        <url-pattern>/searchform</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+   

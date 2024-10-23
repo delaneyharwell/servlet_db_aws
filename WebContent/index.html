@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Movie List</h1>
+<!-- Table where the movie data will be displayed -->
+<table id="movieTable">
+    <thead>
+    <tr>
+        <!--<th>Movie ID</th>-->
+        <th>Title</th>
+        <th>Year</th>
+        <th>Director</th>
+        <th>Stars</th>
+        <th>Genre</th>
+        <th>Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Data rows will be added here dynamically -->
+    </tbody>
+</table>
+
+<script>
+    // Run the function when the window has finished loading
+    window.onload = function() {
+        fetch('/2024-fall-cs-122b-coding-cowgirls/movies')
+            .then(response => {
+                console.log("Raw response:", response); // Log the raw response object
+                return response.text(); // Get the raw text to see what's being returned
+            })
+            .then(text => {
+                console.log("Response text:", text); // Log the response as text
+                const data = JSON.parse(text); // Try manually parsing the JSON string
+                console.log("Parsed data:", data); // Log the parsed JSON
+
+                // If it parses successfully, you can populate the table as before
+                const tableBody = document.getElementById('movieTable').getElementsByTagName('tbody')[0];
+                data.forEach(movie => {
+                    const row = tableBody.insertRow();
+                    //const cellId = row.insertCell(0);
+                    const cellTitle = row.insertCell(0);
+                    const cellYear = row.insertCell(1);
+                    const cellDirector = row.insertCell(2);
+                    const cellStars = row.insertCell(3);
+                    const cellGenres = row.insertCell(4);
+                    const cellRating = row.insertCell(5)
+
+
+                    //cellId.textContent = movie.movie_id;
+                    const link = document.createElement('a');
+                    link.href = `singlemovie.html?movieId=${movie.movie_id}`;
+                    link.textContent = movie.movie_title;
+                    cellTitle.appendChild(link);
+                    cellYear.textContent = movie.movie_year;
+                    cellDirector.textContent = movie.movie_director;
+                    cellStars.innerHTML = movie.movie_stars;
+                    cellGenres.textContent = movie.movie_genres;
+                    cellRating.textContent = movie.movie_rating;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    };
+
+
+</script>
+
+</body>
+</html>

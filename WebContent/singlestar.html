@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Details</title>
+</head>
+<body>
+<h1>Star Details</h1>
+<div id="starDetails"></div>
+
+<script>
+    // Get starId from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const starId = urlParams.get('starId'); // This retrieves the starId from the query string
+
+    // Check if movieId exists
+    if (starId) {
+        console.log('Star ID:', starId); // Log to check the starId
+
+        // Fetch movie details from the servlet
+        fetch(`/2024-fall-cs-122b-coding-cowgirls/singlestar?starId=${starId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Star data:', data); // Log the data to verify
+                const starDetailsDiv = document.getElementById('starDetails');
+                starDetailsDiv.innerHTML = `
+                        <h2>${data[0].name}</h2>
+                        <p>Born in: ${data[0].birth_year}</p>
+                        <h3>Movies</h3>
+                        <p>${data[0].movies}</p>
+                        <p><br><br><a href="/2024-fall-cs-122b-coding-cowgirls/">Back to Movie List</a></p>
+                    `;
+            })
+            .catch(error => console.error('Error fetching star details:', error));
+    } else {
+        console.error('No starId found in URL');
+    }
+</script>
+</body>
+</html>

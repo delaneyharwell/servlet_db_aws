@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+</head>
+<body>
+<h1>Movie Details</h1>
+<div id="movieDetails"></div>
+
+<script>
+    // Get movieId from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get('movieId'); // This retrieves the movieId from the query string
+
+    // Check if movieId exists
+    if (movieId) {
+        console.log('Movie ID:', movieId); // Log to check the movieId
+
+        // Fetch movie details from the servlet
+        fetch(`/2024-fall-cs-122b-coding-cowgirls/singlemovie?movieId=${movieId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Movie data:', data); // Log the data to verify
+                const movieDetailsDiv = document.getElementById('movieDetails');
+                movieDetailsDiv.innerHTML = `
+                        <h2>${data[0].movie_title}</h2>
+                        <p>Year: ${data[0].movie_year}</p>
+                        <p>Director: ${data[0].movie_director}</p>
+                        <p>Stars: ${data[0].movie_stars}</p>
+                        <p>Genres: ${data[0].movie_genres}</p>
+                        <p>Rating: ${data[0].movie_rating}</p>
+
+                        <p><br><br><a href="/2024-fall-cs-122b-coding-cowgirls/">Back to Movie List</a></p>
+                    `;
+            })
+            .catch(error => console.error('Error fetching movie details:', error));
+    } else {
+        console.error('No movieId found in URL');
+    }
+</script>
+</body>
+</html>

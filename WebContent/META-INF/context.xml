@@ -1,0 +1,8 @@
+<Context path="/2024-fall-cs-122b-coding-cowgirls">
+    <Resource name="jdbc/moviedb" auth="Container" type="javax.sql.DataSource"
+              maxActive="20" maxIdle="10" maxWait="-1"
+              username="mytestuser" password="My6$Password"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://13.52.193.41:3306/moviedb" />
+</Context>
+
